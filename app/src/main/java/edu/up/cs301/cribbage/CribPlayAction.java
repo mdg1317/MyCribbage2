@@ -1,4 +1,4 @@
-package edu.up.cs301.slapjack;
+package edu.up.cs301.cribbage;
 
 import edu.up.cs301.game.GameFramework.GamePlayer;
 
@@ -9,7 +9,7 @@ import edu.up.cs301.game.GameFramework.GamePlayer;
  * @author Steven R. Vegdahl
  * @version 31 July 2002
  */
-public class SJPlayAction extends SJMoveAction
+public class CribPlayAction extends CribMoveAction
 {
 	private static final long serialVersionUID = 3250639793499599047L;
 
@@ -18,7 +18,7 @@ public class SJPlayAction extends SJMoveAction
      * 
      * @param player  the player making the move
      */
-    public SJPlayAction(GamePlayer player)
+    public CribPlayAction(GamePlayer player)
     {
         // initialize the source with the superclass constructor
         super(player);

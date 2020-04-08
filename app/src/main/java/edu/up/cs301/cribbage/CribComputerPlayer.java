@@ -1,11 +1,9 @@
-package edu.up.cs301.slapjack;
+package edu.up.cs301.cribbage;
 
-import android.util.Log;
 import edu.up.cs301.card.Card;
 import edu.up.cs301.card.Rank;
 import edu.up.cs301.game.GameFramework.GameComputerPlayer;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.TimerInfo;
 
 /**
  * This is a computer player that slaps at an average rate given
@@ -14,13 +12,13 @@ import edu.up.cs301.game.GameFramework.infoMessage.TimerInfo;
  * @author Steven R. Vegdahl
  * @version July 2013 
  */
-public class SJComputerPlayer extends GameComputerPlayer
+public class CribComputerPlayer extends GameComputerPlayer
 {
 	// the minimum reaction time for this player, in milliseconds
 	private double minReactionTimeInMillis;
 	
 	// the most recent state of the game
-	private SJState savedState;
+	private CribState savedState;
 	
     /**
      * Constructor for the SJComputerPlayer class; creates an "average"
@@ -29,7 +27,7 @@ public class SJComputerPlayer extends GameComputerPlayer
      * @param name
      * 		the player's name
      */
-    public SJComputerPlayer(String name) {
+    public CribComputerPlayer(String name) {
         // invoke general constructor to create player whose average reaction
     	// time is half a second.
         this(name, 0.5);
@@ -38,7 +36,7 @@ public class SJComputerPlayer extends GameComputerPlayer
     /*
      * Constructor for the SJComputerPlayer class
      */
-    public SJComputerPlayer(String name, double avgReactionTime) {
+    public CribComputerPlayer(String name, double avgReactionTime) {
         // invoke superclass constructor
         super(name);
         
@@ -59,7 +57,7 @@ public class SJComputerPlayer extends GameComputerPlayer
     	Card topCard = savedState.getDeck(2).peekAtTopCard();
     	if (topCard != null && topCard.getRank() == Rank.JACK) {
     		// the Jack is still there, so submit our move to the game object
-    		game.sendAction(new SJSlapAction(this));
+    		game.sendAction(new CribSlapAction(this));
     	}
     	
     	// stop the timer, since we don't want another timer-tick until it
@@ -75,12 +73,12 @@ public class SJComputerPlayer extends GameComputerPlayer
     protected void receiveInfo(GameInfo info) {
     	
     	// if we don't have a game-state, ignore
-    	if (!(info instanceof SJState)) {
+    	if (!(info instanceof CribState)) {
     		return;
     	}
     	
     	// update our state variable
-    	savedState = (SJState)info;
+    	savedState = (CribState)info;
     	
     	// access the state's middle deck
     	Deck middleDeck = savedState.getDeck(2);
@@ -105,7 +103,7 @@ public class SJComputerPlayer extends GameComputerPlayer
         	sleep((int)(2*Math.random()));
         	
         	// submit our move to the game object
-        	game.sendAction(new SJPlayAction(this));
+        	game.sendAction(new CribPlayAction(this));
     	}
     }
 }

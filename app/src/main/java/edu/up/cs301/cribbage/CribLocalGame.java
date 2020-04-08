@@ -1,11 +1,10 @@
-package edu.up.cs301.slapjack;
+package edu.up.cs301.cribbage;
 
 import android.util.Log;
 import edu.up.cs301.card.Rank;
 import edu.up.cs301.game.GameFramework.GamePlayer;
 import edu.up.cs301.game.GameFramework.LocalGame;
 import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
-import edu.up.cs301.game.GameFramework.gameConfiguration.GameConfig;
 
 /**
  * The LocalGame class for a slapjack game.  Defines and enforces
@@ -15,18 +14,18 @@ import edu.up.cs301.game.GameFramework.gameConfiguration.GameConfig;
  * @version July 2013
  */
 
-public class SJLocalGame extends LocalGame {
+public class CribLocalGame extends LocalGame {
 
     // the game's state
-    SJState state;
+    CribState state;
 
     /**
      * Constructor for the SJLocalGame.
      */
-    public SJLocalGame() {
+    public CribLocalGame() {
         Log.i("SJLocalGame", "creating game");
         // create the state for the beginning of the game
-        state = new SJState();
+        state = new CribState();
     }
 
 
@@ -86,7 +85,7 @@ public class SJLocalGame extends LocalGame {
 
 		// make a copy of the state; null out all cards except for the
 		// top card in the middle deck
-		SJState stateForPlayer = new SJState(state); // copy of state
+		CribState stateForPlayer = new CribState(state); // copy of state
 		stateForPlayer.nullAllButTopOf2(); // put nulls except for visible card
 		
 		// send the modified copy of the state to the player
@@ -123,10 +122,10 @@ public class SJLocalGame extends LocalGame {
 	protected boolean makeMove(GameAction action) {
 		
 		// check that we have slap-jack action; if so cast it
-		if (!(action instanceof SJMoveAction)) {
+		if (!(action instanceof CribMoveAction)) {
 			return false;
 		} 
-		SJMoveAction sjma = (SJMoveAction) action;
+		CribMoveAction sjma = (CribMoveAction) action;
 		
 		// get the index of the player making the move; return false
 		int thisPlayerIdx = getPlayerIdx(sjma.getPlayer());

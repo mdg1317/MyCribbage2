@@ -1,8 +1,7 @@
-package edu.up.cs301.slapjack;
+package edu.up.cs301.cribbage;
 
 import java.util.ArrayList;
 
-import edu.up.cs301.card.Card;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
 import edu.up.cs301.game.GameFramework.GamePlayer;
 import edu.up.cs301.game.GameFramework.LocalGame;
@@ -16,7 +15,7 @@ import android.graphics.Color;
  * @author Steven R. Vegdahl
  * @version July 2013
  */
-public class SJMainActivity extends GameMainActivity {
+public class CribMainActivity extends GameMainActivity {
 	
 	public static final int PORT_NUMBER = 4752;
 
@@ -29,36 +28,36 @@ public class SJMainActivity extends GameMainActivity {
 		
 		playerTypes.add(new GamePlayerType("human player (green)") {
 			public GamePlayer createPlayer(String name) {
-				return new SJHumanPlayer(name, Color.GREEN);
+				return new CribHumanPlayer(name, Color.GREEN);
 			}});
 		playerTypes.add(new GamePlayerType("human player (yellow)") {
 			public GamePlayer createPlayer(String name) {
-				return new SJHumanPlayer(name, Color.YELLOW);
+				return new CribHumanPlayer(name, Color.YELLOW);
 			}
 		});
 		playerTypes.add(new GamePlayerType("computer player (normal)") {
 			public GamePlayer createPlayer(String name) {
-				return new SJComputerPlayer(name);
+				return new CribComputerPlayer(name);
 			}
 		});
 		playerTypes.add(new GamePlayerType("computer player (fast)") {
 			public GamePlayer createPlayer(String name) {
-				return new SJComputerPlayer(name, 0.3);
+				return new CribComputerPlayer(name, 0.3);
 			}
 		});
 		playerTypes.add(new GamePlayerType("computer player (slow)") {
 			public GamePlayer createPlayer(String name) {
-				return new SJComputerPlayer(name, 1.0);
+				return new CribComputerPlayer(name, 1.0);
 			}
 		});
 		playerTypes.add(new GamePlayerType("computer player (very fast)") {
 			public GamePlayer createPlayer(String name) {
-				return new SJComputerPlayer(name, 0.15);
+				return new CribComputerPlayer(name, 0.15);
 			}
 		});
 		playerTypes.add(new GamePlayerType("computer player (very slow)") {
 			public GamePlayer createPlayer(String name) {
-				return new SJComputerPlayer(name, 3.5);
+				return new CribComputerPlayer(name, 3.5);
 			}
 		});
 
@@ -78,6 +77,6 @@ public class SJMainActivity extends GameMainActivity {
 
 	@Override
 	public LocalGame createLocalGame() {
-		return new SJLocalGame();
+		return new CribLocalGame();
 	}
 }

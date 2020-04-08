@@ -1,4 +1,4 @@
-package edu.up.cs301.slapjack;
+package edu.up.cs301.cribbage;
 
 import android.app.Activity;
 import android.graphics.Canvas;
@@ -15,7 +15,6 @@ import edu.up.cs301.game.GameFramework.GameHumanPlayer;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
 import edu.up.cs301.game.R;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
-import edu.up.cs301.game.GameFramework.infoMessage.GameState;
 import edu.up.cs301.game.GameFramework.infoMessage.IllegalMoveInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
 
@@ -28,7 +27,7 @@ import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
  * @author Steven R. Vegdahl
  * @version January 2020
  */
-public class SJHumanPlayer extends GameHumanPlayer implements Animator {
+public class CribHumanPlayer extends GameHumanPlayer implements Animator {
 
 	// sizes and locations of card decks and cards, expressed as percentages
 	// of the screen height and width
@@ -39,7 +38,7 @@ public class SJHumanPlayer extends GameHumanPlayer implements Animator {
 	private final static float VERTICAL_BORDER_PERCENT = 4; // width of top/bottom borders
 	
 	// our game state
-	protected SJState state;
+	protected CribState state;
 
 	// our activity
 	private Activity myActivity;
@@ -58,7 +57,7 @@ public class SJHumanPlayer extends GameHumanPlayer implements Animator {
 	 * @param bkColor
 	 * 		the background color
 	 */
-	public SJHumanPlayer(String name, int bkColor) {
+	public CribHumanPlayer(String name, int bkColor) {
 		super(name);
 		backgroundColor = bkColor;
 	}
@@ -76,7 +75,7 @@ public class SJHumanPlayer extends GameHumanPlayer implements Animator {
 			// if we had an out-of-turn or illegal move, flash the screen
 			surface.flash(Color.RED, 50);
 		}
-		else if (!(info instanceof SJState)) {
+		else if (!(info instanceof CribState)) {
 			// otherwise, if it's not a game-state message, ignore
 			return;
 		}
@@ -84,7 +83,7 @@ public class SJHumanPlayer extends GameHumanPlayer implements Animator {
 			// it's a game-state object: update the state. Since we have an animation
 			// going, there is no need to explicitly display anything. That will happen
 			// at the next animation-tick, which should occur within 1/20 of a second
-			this.state = (SJState)info;
+			this.state = (CribState)info;
 			Log.i("human player", "receiving");
 		}
 	}
@@ -318,12 +317,12 @@ public class SJHumanPlayer extends GameHumanPlayer implements Animator {
 		if (myTopCardLoc.contains(x, y)) {
 			// it's on my pile: we're playing a card: send action to
 			// the game
-			game.sendAction(new SJPlayAction(this));
+			game.sendAction(new CribPlayAction(this));
 		}
 		else if (middleTopCardLoc.contains(x, y)) {
 			// it's on the middlel pile: we're slapping a card: send
 			// action to the game
-			game.sendAction(new SJSlapAction(this));
+			game.sendAction(new CribSlapAction(this));
 		}
 		else {
 			// illegal touch-location: flash for 1/20 second
